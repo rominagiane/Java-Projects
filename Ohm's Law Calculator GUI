@@ -1,0 +1,101 @@
+/**
+ * Ohm’s Law Calculator GUI
+ * 
+ * This program provides a graphical user interface (GUI) to compute the missing voltage, 
+ * current, or resistance using Ohm’s Law. The GUI consists of text fields for entering 
+ * voltage, current, and resistance values, labels for each input field, and a button to 
+ * perform the computation. The user can input two out of three values, and the program 
+ * will calculate and display the missing value based on Ohm’s Law.
+ * 
+ * The GUI is implemented using Java's Swing library and features event handling for the 
+ * Compute button, which triggers the computation when clicked.
+ * 
+ * @author Romina Giane Z. Oba
+ * @version 1.0
+ */
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ObaM2 implements ActionListener {
+    // ObaM2 is its own runnable client program
+    public static void main(String[] args) {
+        ObaM2 gui = new ObaM2();
+    }
+
+    // onscreen components stored as fields
+    private JFrame frame;
+    private JTextField vField, iField, rField;
+    private JLabel vLabel, iLabel, rLabel;
+    private JButton computeButton;
+
+    /**
+     * Constructor to set up the GUI components and layout.
+     */
+    public ObaM2() {
+        // set up components
+        vField = new JTextField(15);
+        iField = new JTextField(15);
+        rField = new JTextField(15);
+        vLabel = new JLabel("Voltage (V): ");
+        iLabel = new JLabel("Current (A): ");
+        rLabel = new JLabel("Resistance (Ohms): ");
+        computeButton = new JButton("Compute"); 
+
+        // attach GUI as event listener to Compute button
+        computeButton.addActionListener(this);
+
+        // layout
+        JPanel north = new JPanel(new GridLayout(3, 2));
+        north.add(vLabel);
+        north.add(vField);
+        north.add(iLabel);
+        north.add(iField);
+        north.add(rLabel);
+        north.add(rField);
+
+        // overall frame
+        frame = new JFrame("Ohm’s Law");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(north, BorderLayout.NORTH);
+        frame.add(computeButton, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    /**
+     * Handles clicks on the Compute button.
+     */
+    public void actionPerformed(ActionEvent event) {
+        // Check which input field is empty and calculate the missing value accordingly
+        if (rField.getText().isEmpty()) {
+            String voltage = vField.getText();
+            double vNum = Double.parseDouble(voltage);
+            String current = iField.getText();
+            double iNum = Double.parseDouble(current);
+            double fa = vNum / iNum;
+            String answer = String.valueOf(fa);
+            rField.setText(answer);
+        }
+        if (vField.getText().isEmpty()) {
+            String current = iField.getText();
+            double iNum = Double.parseDouble(current);
+            String resistance = rField.getText();
+            double rNum = Double.parseDouble(resistance);
+            double fa = iNum * rNum;
+            String answer = String.valueOf(fa);
+            vField.setText(answer);
+        }
+        if (iField.getText().isEmpty()) {
+            String voltage = vField.getText();
+            double vNum = Double.parseDouble(voltage);
+            String resistance = rField.getText();
+            double rNum = Double.parseDouble(resistance);
+            double fa = vNum / rNum;
+            String answer = String.valueOf(fa);
+            iField.setText(answer);
+        }
+    }
+}
