@@ -1,0 +1,78 @@
+/**
+ * Number System Converter GUI
+ * 
+ * This program implements a GUI application for converting numbers between different number systems
+ * (Binary, Decimal, Octal, and Hexadecimal). The GUI includes buttons for number input, A-F (for hex),
+ * and conversion operations. It provides a display screen for input and converted values, as well as
+ * functionality to perform backspace, delete, and reset operations.
+ * 
+ * @author Romina Giane Z. Oba
+ * @version 1.0
+ */
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+
+public class ObaM20 {
+    public static void main(String[] args) {
+        
+        // Setup on-screen components: buttons for numbers, A-F, and conversions
+        // String arrays of the converter buttons
+        String[] buttons = {
+                "B -> O", "D", "E", "F",
+                "B -> H", "A", "B", "C",
+                "O -> B", "7", "8", "9",
+                "O -> H", "4", "5", "6",
+                "H -> B", "1", "2", "3",
+                "H -> O", "0", "+/-", "."
+        };
+        String[] function = {
+                "Backspace", "Delete", "Reset"
+        };
+
+        // Setup on-screen components: Display screens
+        JLabel input = new JLabel(" Input Value");
+        JLabel output = new JLabel(" Converted Value");
+
+        JTextArea inputScreen = new JTextArea();
+        inputScreen.setText(" 0.");
+        inputScreen.setEditable(false);
+        inputScreen.setFont(new Font("Cambria Math", Font.PLAIN, 24));
+        Border blackline = BorderFactory.createLineBorder(Color.black);
+        inputScreen.setBorder(blackline);
+
+        JTextArea outputScreen = new JTextArea();
+        outputScreen.setText(" 0.");
+        outputScreen.setEditable(false);
+        outputScreen.setFont(new Font("Cambria Math", Font.PLAIN, 24));
+        outputScreen.setMargin(new Insets(10, 10, 10, 10));
+        outputScreen.setBorder(blackline);
+
+        /* Layout: Adding the buttons using a for loop and JButtons
+           JPanel is used to group the keypad components, and
+           Grid Layout is used so that the buttons adjust according
+           to the frame size */
+        JPanel screen = new JPanel(new GridLayout(2, 2));
+        screen.add(input);
+        screen.add(output);
+        screen.add(inputScreen);
+        screen.add(outputScreen);
+        JPanel keypad = new JPanel(new GridLayout(6, 4));
+        for (int i = 0; i < buttons.length; i++)
+            keypad.add(new JButton(buttons[i]));
+        JPanel functionPanel = new JPanel(new GridLayout(1, 4));
+        for (int j = 0; j < function.length; j++)
+            functionPanel.add(new JButton(function[j]));
+
+        // Overall frame of the converter
+        JFrame frame = new JFrame("Number System Converter");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(screen, BorderLayout.NORTH);           // Border layout is used to arrange
+        frame.add(functionPanel, BorderLayout.CENTER);   // the components from top to bottom
+        frame.add(keypad, BorderLayout.SOUTH);
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
