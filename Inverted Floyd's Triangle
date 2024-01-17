@@ -1,0 +1,48 @@
+// Romina Giane Z. Oba
+// A program that creates an inverted Floyd's triangle based on the user's input
+
+import java.util.Scanner;
+
+public class InvertedTriangle {
+
+    public static void main(String[] args) {
+        
+        // Variable declarations
+        int userInput, row, numPrint, space;
+        int output = 1;
+
+        // Scanner object for user input
+        Scanner input = new Scanner(System.in);
+
+        // Prompt user to input the number of rows for the inverted Floyd's triangle
+        System.out.print("Input Number of Rows: ");
+        userInput = input.nextInt(); 
+
+        System.out.println();
+
+        // Loop for rows (inverted Floyd's triangle)
+        for (row = userInput; row >= 1; row--) {
+            
+            // Loop for spaces before the numbers in each row
+            for (space = 1; space <= userInput - row; space++) {
+                System.out.print("  ");
+            }
+            
+            // Loop for printing numbers in each row
+            for (numPrint = 1; numPrint <= row; numPrint++) {
+                
+                // Check if the output is a single-digit number to adjust formatting
+                if (output <= 9)
+                    System.out.print(output + "   ");
+                else
+                    System.out.print(output + "  ");
+                
+                output++;  // Increment the output value for the next iteration
+            }
+
+            System.out.println();  // Move to the next line after each row
+            System.out.println();  // Add an extra line for better visualization
+        }
+
+    }
+}
